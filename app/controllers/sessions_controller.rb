@@ -2,10 +2,10 @@ class SessionsController < ApplicationController
 	def create
 		user = User.find_by(email:user_params[:email])
 		if !user
-			flashp[:log_errors] = ["Email address not found"]
+			flash[:log_errors] = ["Email address not found"]
 			redirect_to users_new_path
 		elsif !user.authenticate(user_params[:password])
-			flashp[:log_errors] = ["Invalid password"]
+			flash[:log_errors] = ["Invalid password"]
 			redirect_to users_new_path
 		else
 			session[:user_id] = user.id
