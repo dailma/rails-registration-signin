@@ -1,0 +1,24 @@
+<% content_for :head do %>
+	<title>User profile - Futures</title>
+<% end %>
+
+<h2>User profile for <%= @user.full_name %></h2>
+<% if flash[:success] %>
+	<p class="success_msg"><%= flash[:success] %></p>
+<% end %>
+<div class="show_labels">
+	<p>First name</p>
+	<p>Last name</p>
+	<p>Email</p>
+	<p>Location</p>
+	<p>Region</p>
+</div>
+<div class="show_values">
+	<p><%= @user.given_name %></p>
+	<p><%= @user.surname %></p>
+	<p><%= @user.email %></p>
+	<p><%= @user.location %></p>
+	<p><%= @user.region %></p>
+</div>
+<a href="<%= url_for(:controller => :users, :action => :edit, :id => session[:user_id]) %>">Edit profile</a>
+<a href="<%= url_for(:controller => :futures) %>">Home</a>

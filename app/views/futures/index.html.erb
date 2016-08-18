@@ -1,0 +1,43 @@
+<% content_for :head do %>
+	<title>Dashboard - Futures</title>
+<% end %>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |msg| %>
+	    <p class="error_msgs"><%= msg %></p>
+	<% end %>
+<% end %>
+<% if flash[:success] %>
+	<p class="success_msg"><%= flash[:success] %></p>
+<% end %>
+<h2>Welcome to the future, <%= @name %>!</h2>
+<p>Lots of interesting stuff will happen here...in the future</p>
+<table>
+	<tr>
+		<th>Category</th>
+		<th>Item</th>
+		<th>Quantity</th>
+	</tr>
+	<tr>
+		<td>Accessories</td>
+		<td>Mouse, levitating</td>
+		<td>4</td>
+	</tr>
+	<tr>
+		<td>Software</td>
+		<td>Corel PaintShop Pro X8</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>Ninjas</td>
+		<td>Shuriken set</td>
+		<td>18</td>
+	</tr>
+	<tr>
+		<td>Ninjas</td>
+		<td>Hood, black</td>
+		<td>5</td>
+	</tr>
+</table>
+<a href="<%= url_for(:controller => :users, :action => :show, :id => session[:user_id]) %>">Show profile</a>
+<a href="<%= url_for(:controller => :users, :action => :edit, :id => session[:user_id]) %>">Edit profile</a>

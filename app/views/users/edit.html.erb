@@ -1,0 +1,45 @@
+<% content_for :head do %>
+	<title>Edit profile - Futures</title>
+<% end %>
+
+<h2>Edit your profile</h2>
+<% if flash[:errors] %>
+	<% flash[:errors].each do |msg| %>
+	    <p class="error_msgs"><%= msg %></p>
+	<% end %>
+<% end %>
+<form action="<%= url_for(:controller => :users, :action => :update, :id => session[:user_id]) %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="_method" value="put">
+	<div class="form_labels">
+		<label for="user[given_name]">First name</label>
+		<label for="user[surname]">Last name</label>
+		<label for="user[email]">Email</label>
+		<label for="user[location]">Location</label>
+	</div>
+	<div class="form_inputs">
+		<input type="text" name="user[given_name]" value=<%= @user.given_name %> >
+		<input type="text" name="user[surname]" value=<%= @user.surname %> >
+		<input type="text" name="user[email]" value=<%= @user.email %> >
+		<input type="text" name="user[location]" value=<%= @user.location %> class="text_loc">
+		<select name="user[region]">
+			<% regions_us_cn.each do |region| %>
+				<% if region == "--" %>
+					<option value="<%= region %>" disabled="disabled"><%= region %></option>
+				<% elsif region == @user.region %>
+					<option value="<%= region %>" selected="selected"><%= region %></option>
+				<% else %>
+					<option value="<%= region %>"><%= region %></option>
+				<% end %>
+			<% end %>
+		</select><br>
+		<input type="submit" value="Update">
+	</div>
+</form>
+<form action="<%= url_for(:controller => :users, :action => :destroy, :id => session[:user_id]) %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="_method" value="delete">
+	<input type="submit" value="Delete Account" class="btn_link">
+</form>
+<a href="<%= url_for(:controller => :users, :action => :show, :id => session[:user_id]) %>">Show profile</a>
+<a href="<%= url_for(:controller => :futures) %>">Home</a>
